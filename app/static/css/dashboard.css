@@ -1,0 +1,315 @@
+body {
+    padding: 2%;
+    margin: 0;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    background: linear-gradient(0deg, rgba(0,240,144,1) 29%, rgba(0,57,227,1) 100%);
+}
+
+.main-background {
+    background-color: #F4F7FF !important;
+    height: 92vh;
+    border-radius: 15px;
+    padding: 2% 1% 2% 2%;
+}
+
+.left-nav {
+    background-color: white !important;
+    height: 85vh;
+    border-radius: 15px;
+    width: 15% !important;
+}
+
+.left-nav h1 {
+    text-align: center;
+    color: #121F34;
+    padding: 10% 0;
+    font-size: 3rem;
+    border-bottom: 1px solid rgba(53, 53, 53, 0.918);
+    vertical-align: text-top !important;
+    margin-bottom: 10%;
+    background: rgb(0, 240, 144);
+    background: linear-gradient(77deg, rgba(0, 240, 144, 1) 29%, rgba(0, 57, 227, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.row>* {
+    padding: 0 !important;
+}
+
+.col-8 {
+    width: 85% !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:checked,
+a:hover {
+    text-decoration: none !important;
+}
+
+.left-nav button {
+    padding: 4% 10%;
+    color: #6F5EFD;
+    font-size: 1rem;
+    line-height: 30px;
+    opacity: .7;
+    background: none;
+    border: 0;
+}
+
+.left-nav button:hover,
+.left-nav .active {
+    color: #121F34 !important;
+    opacity: 1 !important;
+    background: none !important;
+}
+
+
+.dashboard {
+    height: 85vh;
+    position: relative;
+    padding: 1% 2% !important;
+    overflow-y: scroll !important;
+}
+
+.dashboard::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+    border-radius: 15px;
+}
+
+.dashboard::-webkit-scrollbar-track {
+    background-color: #F4F7FF;
+}
+
+.dashboard::-webkit-scrollbar-thumb {
+    background-color: #121F34;
+    border-radius: 15px;
+}
+
+
+.dashboard h2 {
+    color: #121F34;
+    font-size: 2rem;
+}
+
+.accuracy {
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border-radius: 15px;
+    z-index: 1;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    padding: 2%;
+}
+
+
+.accuracy:before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+    filter: blur(10px);
+}
+
+.accuracy h3 {
+    color: #121F34;
+    font-size: 1.5rem;
+}
+
+.card-1 {
+    background-color: white !important;
+    margin: 2% 1%;
+    border-radius: 20px;
+    height: 50vh;
+}
+
+.card1-header{
+    background: rgb(0,240,144);
+    background: linear-gradient(7deg, rgba(0,240,144,1) 29%, rgba(0,57,227,1) 100%);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    height:7vh;
+    text-align: center;
+    top: 0;
+}
+
+.card-2 .card1-header{
+    height: 10vh!important;
+}
+
+.card1-header-rev{
+    background: linear-gradient(195deg, rgba(0,240,144,1) 29%, rgba(0,57,227,1) 100%)!important;
+}
+
+.card1-header h4{
+    color: #0B1437;
+    font-size: 1.2rem;
+    padding: 2% 0;
+}
+
+.card-2 {
+    background-color: white !important;
+    margin: 2% 1%;
+    border-radius: 20px;
+    width: 98%;
+    height: 100%;
+}
+
+.css-ps5lfl {
+    margin: 10px;
+    border-radius: 30px;
+}
+
+.css-exwyyx {
+    display: flex;
+    background: linear-gradient(195deg, rgba(0,240,144,1) 29%, rgba(0,57,227,1) 100%)!important;
+    border-radius: 30px;
+    position: relative;
+}
+
+.css-zslr2w h5{
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.css-zslr2w p{
+    font-weight: 600;
+}
+
+.css-sl61el {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0,240,144);
+    background: linear-gradient(135deg, rgba(0,240,144,1) 35%, rgba(0,57,227,1) 100%);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    -webkit-margin-start: auto;
+    margin-inline-start: auto;
+    -webkit-margin-end: auto;
+    margin-inline-end: auto;
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    -webkit-transform: translate(-50%, 0%);
+    -moz-transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+}
+
+.css-zslr2w {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    -webkit-padding-start: 15px;
+    padding-inline-start: 15px;
+    -webkit-padding-end: 15px;
+    padding-inline-end: 15px;
+    padding-top: 35px;
+}
+
+.css-zslr2w p {
+    font-size: .8rem;
+    text-align: left;
+}
+
+.css-exwyyx img {
+    height: 45px;
+    width: 45px;
+}
+
+.wob-unit {
+    color: #202124;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 6px;
+    padding-left: 6px;
+    vertical-align: top;
+}
+
+.weather img {
+    height: 80%;
+    width: 90%;
+    text-align: center;
+    margin: 2% 5%;
+}
+
+.sign-up-card {
+    margin: 0 2% 0 2%;
+    width: 95%;
+    height: 85vh;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.bapp-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 85vh;
+    background: linear-gradient(0deg, rgba(0,240,144,1) 29%, rgba(0,57,227,1) 100%);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.bapp-logo-signup {
+    height: 45vh;
+    width: 75%;
+}
+
+.bapp-logo h2{
+    font-size: 3.5rem;
+    font-family: 'Tilt Prism',cursive;
+    font-weight: 800;
+}
+
+.bapp-signup {
+    height: 85vh;
+    padding: 15% 4% !important;
+    background: linear-gradient(180deg, rgba(0,240,144,1) 29%, rgba(0,57,227,1) 100%);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.bapp-signup input,
+.bapp-signup button {
+    border-radius: 14px;
+}
+
+.bapp-signup button {
+    background: #212529;
+    color: aliceblue;
+}
+
+.bapp-signup button:hover{
+    background: black;
+}
+
+.bapp-signup label {
+    font-size: 1.2rem;
+    line-height: 15px;
+    color: #0B1437;
+    font-weight: 600;
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bapp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/select.css') }}">
+  </head>
+  <body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid text-center">
+          <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='images/bapp-logo.png') }}" alt="Logo" class="d-inline-block align-text-top">
+          </a>
+        </div>
+      </nav>
+    <div class="container">
+        <form action="" method="post">
+            <select class="form-select form-select-lg mb-3 text-center" name="district" id="district">
+                <option selected disabled>Open this select menu</option>
+                <option value="BAGALKOT">BAGALKOT</option>
+                <option value="BELGAUM">BELGAUM</option>
+                <option value="BELLARY">BELLARY</option>
+                <option value="BENGALURU">BENGALURU</option>
+                <option value="BENGALURU RURAL">BENGALURU RURAL</option>
+                <option value="BIDAR">BIDAR</option>
+                <option value="CHAMARAJANAGAR">CHAMARAJANAGAR</option>
+                <option value="CHIKBALLAPUR">CHIKBALLAPUR</option>
+                <option value="CHIKMAGALUR">CHIKMAGALUR</option>
+                <option value="CHITRADURGA">CHITRADURGA</option>
+                <option value="DAKSHINA KANNADA">DAKSHINA KANNADA</option>
+                <option value="DAVANGERE">DAVANGERE</option>
+                <option value="DHARWAD">DHARWAD</option>
+                <option value="GADAG">GADAG</option>
+                <option value="GULBARGA">GULBARGA</option>
+                <option value="HASSAN">HASSAN</option>
+                <option value="HAVERI">HAVERI</option>
+                <option value="KODAGU">KODAGU</option>
+                <option value="BAGALKOT">KOLAR</option>
+                <option value="KOPPAL">KOPPAL</option>
+                <option value="MANDYA">MANDYA</option>
+                <option value="MYSORE">MYSORE</option>
+                <option value="RAICHUR">RAICHUR</option>
+                <option value="RAMANAGARA">RAMANAGARA</option>
+                <option value="SHIMOGA">SHIMOGA</option>
+                <option value="TUMKUR">TUMKUR</option>
+                <option value="UDUPI">UDUPI</option>
+                <option value="UTTARA KANNADA">UTTARA KANNADA</option>
+                <option value="YADGIR">YADGIR</option>
+              </select>
+        </form>
+    </div>
+    <footer class="d-flex justify-content-center align-items-end">
+        copyright © 2023 | bapp
+    </footer>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        $('#district').change(function () {
+            var district = $(this).val();
+            console.log(district);
+            location.href = 'dashboard/'.concat(district)
+        })
+    })
+  </script>
+</html>

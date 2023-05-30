@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bapp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="container-fluid main-background">
+        <div class="row h-100">
+            <div class="nav-pills col-4 d-flex left-nav flex-column justify-content-between" id="v-pills-tab"
+                role="tablist" aria-orientation="vertical">
+                <div>
+                    <h1>bapp</h1>
+                    <button class="d-flex nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
+                        aria-selected="true"><i class="material-icons" style="font-size: 28px;">home</i> &nbsp;
+                        Dashboard</button>
+                    <button class="d-flex nav-link" id="v-pills-signup-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-signup" type="button" role="tab" aria-controls="v-pills-signup"
+                        aria-selected="false"><i class="material-icons" style="font-size: 28px;">person_pin</i>&nbsp;
+                        Sign
+                        Up</button>
+                    <button class="d-flex nav-link" onclick="history.back()"><i class="material-icons"
+                            style="font-size: 28px;">subject</i>&nbsp;
+                        Select</button>
+                </div>
+                <div>
+                    <div class="css-ps5lfl">
+                        <div class="css-exwyyx">
+                            <div class="css-sl61el"><img src="{{ url_for('static', filename='images/dashboard.png') }}">
+                            </div>
+                            <div class="css-zslr2w">
+                                <h5 class="">bapp</h5>
+                                <p class="">Empower your harvest with data-driven insights. Harvest success, one
+                                    prediction
+                                    at a time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content col-8" id="v-pills-tabContent">
+                <div class="dashboard tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                    aria-labelledby="v-pills-home-tab" tabindex="0">
+                    <h2>Overview</h2>
+                    <div class="accuracy sticky-top w-100 d-block">
+                        <h3>Accuracy of yielding crop in {{dist_name}} is {{accuracy}} %</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col card-1">
+                            <div class="card1-header">
+                                <h4>Yeild Prediction</h4>
+                            </div>
+                            <div id="prediction_production"></div>
+                        </div>
+                        <div class="col card-1">
+                            <div class="card1-header card1-header-rev">
+                                <h4>Rice Price</h4>
+                            </div>
+                            <div id="price"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col card-1">
+                            <div class="card1-header">
+                                <h4>District Wise Farmers</h4>
+                            </div>
+                            <div id="farmers_percent"></div>
+                        </div>
+                        <div class="col card-1">
+                            <div class="card1-header card1-header-rev">
+                                <h4>Fertilizer Requirement</h4>
+                            </div>
+                            <div id="soil_data"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 card-1">
+                            <div class="card1-header">
+                                <h4>Rice Consumtion v/s Productioin</h4>
+                            </div>
+                            <div id="rice_consumption"></div>
+                        </div>
+                        <div class="col card-1">
+                            <div class="card1-header card1-header-rev">
+                                <h4>Food Consumtion</h4>
+                            </div>
+                            <div id="crops_consumption"></div>
+                        </div>
+                        <div class="col card-1 weather">
+                            <div class="card1-header card1-header-rev">
+                                <h4>Weather : {{temp}} <span class="wob_t" style="display:inline" aria-label="°Celsius"
+                                        aria-disabled="true" role="button">°C</span></h4>
+                            </div>
+                            {% if temp >= 30 %}
+                            <img src="{{ url_for('static', filename='images/sunny_more_30.png') }}" alt="Sunny">
+                            {% elif temp >= 20 %}
+                            <img src="{{ url_for('static', filename='images/sunny_less_30.png') }}" alt="Cloudy">
+                            {% elif temp <= 15 %} <img
+                                src="{{ url_for('static', filename='images/cloudy-with-rain-less-15.png') }}"
+                                alt="Rainy">
+                                {% else %}
+                                <img src="{{ url_for('static', filename='images/sunny_less_30.png') }}" alt="cloudy">
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-2">
+                            <div class="card1-header ">
+                                <h4>District wise Rice production in Karnataka (kg/ha)</h4>
+                            </div>
+                            <div id="district_rice"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-signup" role="tabpanel" aria-labelledby="v-pills-signup-tab"
+                    tabindex="0">
+                    <div class="sign-up-card">
+                        <div class="row">
+                            <div class="col bapp-logo">
+                                <img src="{{ url_for('static', filename='images/dashboard.png') }}"
+                                    class="bapp-logo-signup" alt="logo">
+                                <h2>bapp</h2>
+                                <h6>prediction for farmers</h6>
+                            </div>
+                            <div class="col bapp-signup">
+                                <h5 id="flash-message"></h5>
+                                <form id="subscribe-form">
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="exampleInputPassword1" name="name"
+                                            placeholder="Pradyumna" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                                            aria-describedby="emailHelp" placeholder="prad@gmail.com" required>
+                                        <div id="emailHelp" class="form-text">You will receive updates to this mail
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="district" id="" value="{{dist_name}}">
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button"
+                                            class="btn btn-primary w-100 d-flex justify-content-center"
+                                            onclick="submitForm()">Subscribe</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+<script>
+    function submitForm() {
+        var formData = $('#subscribe-form').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/subscribe',
+            data: formData,
+            success: function (response) {
+                $('#flash-message').html(response.message).addClass('alert alert-success').show();
+                $('#subscribe-form')[0].reset();
+                setTimeout(function () {
+                    $('#flash-message').fadeOut('slow');
+                }, 1000);
+            },
+            error: function (error) {
+                $('#flash-message').html('Error in Sending mail please try again').addClass('alert alert-danger').show();
+                setTimeout(function () {
+                    $('#flash-message').fadeOut('slow');
+                }, 1000);
+            }
+        });
+    }
+</script>
+<script>
+    // Production prediction chart
+    var prediction_production = {
+        chart: {
+            height: 225,
+            type: 'bar',
+            toolbar: {
+                show: false
+            }
+        },
+        tooltip: {
+            style: {
+                fontSize: "12px",
+                fontFamily: undefined,
+            },
+            onDatasetHover: {
+                style: {
+                    fontSize: "12px",
+                    fontFamily: undefined,
+                },
+            },
+            theme: "dark",
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                barHeight: '50%',
+                barSpacing: 0,
+                color: ['#5E32FA', '#81DBFA']
+            }
+        },
+        series: [{
+            name: "{{dist_name}}",
+            data: [{
+                x: '2021',
+                y: "{{ previous }}",
+                fillColor: "#5E3BFA",
+            }, {
+                x: '2022',
+                y: "{{ next }}",
+                fillColor: "#82DBFA",
+            }]
+        }],
+    };
+    var prediction_production_chart = new ApexCharts(document.querySelector("#prediction_production"), prediction_production);
+    prediction_production_chart.render();
+
+    // Price Rates 
+    var price = {
+        chart: {
+            height: 225,
+            type: "area",
+            toolbar: {
+                show: false
+            }
+        },
+        tooltip: {
+            style: {
+                fontSize: "12px",
+            },
+            onDatasetHover: {
+                style: {
+                    fontSize: "12px",
+                },
+            },
+            theme: "dark",
+        },
+        dataLabels: {
+            enabled: false
+        },
+        series: [
+            {
+                name: "Rice Price",
+                data: [1450.00, 1510.00, 1590.00, 1770.00, 1835.00]
+            }
+        ],
+        fill: {
+            type: "gradient",
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.9,
+                stops: [0, 90, 100]
+            },
+            colors: ["#5E3BFA"]
+        },
+        xaxis: {
+            categories: [
+                "2015-16",
+                "2016-17",
+                "2017-18",
+                "2018-19",
+                "2019-20"
+            ]
+        }
+    };
+    var price_chart = new ApexCharts(document.querySelector("#price"), price);
+    price_chart.render();
+
+    // District wise Farmers percent data
+    var farmers_percent = {
+        chart: {
+            type: 'donut',
+            height: 235,
+        },
+        series: [15.26, 6.99, 0.14, 5.92, 5.61, 5.55, 5.17, 4.87, 4.72, 4.34, 4.32, 3.97, 3.68, 3.51, 3.17, 2.33, 2.05, 1.68, 1.65, 1.43, 1.38, 1.2, 0.99, 0.96, 0.74, 0.11],
+        labels: ['Mandya', 'Kolar', 'Gadag', 'Bangalore (R)', 'Dakshina Kannada', 'Udupi', 'Koppal', 'Belgaum', 'Bellary', 'Gulbarga', 'Haveri', 'Bagalkot', 'Tumkur', 'Chikkamagalur', 'Bangalore (U)', 'Mysore', 'Chitradurga', 'Chamarajanagar', 'Bijapur', 'Davanagere', 'Hassan', 'Dharwad', 'Kodagu', 'Bidar', 'Raichur', 'Shimoga', 'Uttara Kannada'],
+        colors: ['#FF4500', '#FFA500', '#FFFF00', '#008000', '#4B0082', '#800000', '#FF69B4', '#00FFFF', '#0000FF', '#800080', '#FFC0CB', '#FFD700', '#7FFFD4', '#FF1493', '#00FA9A', '#DC143C', '#FF00FF', '#00BFFF', '#FF7F50', '#9400D3', '#F08080', '#FFDAB9', '#8B0000', '#FFC3A0', '#ADFF2F', '#4169E1', '#EEE8AA']
+    }
+
+    var farmers_percent_chart = new ApexCharts(document.querySelector("#farmers_percent"), farmers_percent);
+    farmers_percent_chart.render();
+
+    // Soil data
+    var soil_data = {
+        chart: {
+            height: 225,
+            type: 'bar',
+            toolbar: {
+                show: false
+            }
+        },
+        tooltip: {
+            style: {
+                fontSize: "12px",
+                fontFamily: undefined,
+            },
+            onDatasetHover: {
+                style: {
+                    fontSize: "12px",
+                    fontFamily: undefined,
+                },
+            },
+            theme: "dark",
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: '50%',
+                distributed: true
+            }
+        },
+        series: [{
+            name: '{{dist_name}}',
+            data: [{
+                x: 'Nitrogen',
+                y: "{{soil_values['N']}}"
+            }, {
+                x: 'Phosphorus',
+                y: "{{soil_values['P']}}"
+            }, {
+                x: 'Pottasium',
+                y: "{{soil_values['K']}}"
+            }]
+        }]
+    }
+
+    var soil_data_chart = new ApexCharts(document.querySelector("#soil_data"), soil_data);
+    soil_data_chart.render();
+
+
+    // Rice Consumtion
+    var rice_consumption_data = [
+        {
+            name: 'PRODUCTION',
+            data: [
+                { x: '2000', y: 98989 },
+                { x: '2001', y: 65667 },
+                { x: '2002', y: 78787 },
+                { x: '2003', y: 89889 },
+                { x: '2004', y: 84444 },
+                { x: '2005', y: 86666 },
+                { x: '2006', y: 90909 },
+                { x: '2007', y: 97879 },
+                { x: '2008', y: 98729 },
+                { x: '2009', y: 99898 },
+                { x: '2010', y: 98989 },
+                { x: '2011', y: 90909 },
+                { x: '2012', y: 97979 },
+                { x: '2013', y: 101011 },
+                { x: '2014', y: 100000 },
+                { x: '2015', y: 100223 },
+                { x: '2016', y: 101293 },
+                { x: '2017', y: 100202 },
+                { x: '2018', y: 102000 }
+            ]
+        },
+        {
+            name: 'DOMESTIC CONSUMPTION',
+            data: [
+                { x: '2000', y: 82700 },
+                { x: '2001', y: 84000 },
+                { x: '2002', y: 85300 },
+                { x: '2003', y: 86600 },
+                { x: '2004', y: 87900 },
+                { x: '2005', y: 89200 },
+                { x: '2006', y: 90500 },
+                { x: '2007', y: 91800 },
+                { x: '2008', y: 93100 },
+                { x: '2009', y: 94400 },
+                { x: '2010', y: 95700 },
+                { x: '2011', y: 97000 },
+                { x: '2012', y: 98300 },
+                { x: '2013', y: 99600 },
+                { x: '2014', y: 100900 },
+                { x: '2015', y: 102200 },
+                { x: '2016', y: 103500 },
+                { x: '2017', y: 104800 },
+                { x: '2018', y: 106100 }
+            ],
+        }
+    ];
+
+    var rice_consumption = {
+        chart: {
+            height: 225,
+            type: 'line',
+            toolbar: {
+                show: false
+            }
+        },
+        tooltip: {
+            style: {
+                fontSize: "12px",
+                fontFamily: undefined,
+            },
+            onDatasetHover: {
+                style: {
+                    fontSize: "12px",
+                    fontFamily: undefined,
+                },
+            },
+            theme: "dark",
+        },
+        series: rice_consumption_data,
+        xaxis: {
+            categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+        },
+        markers: {
+            size: [4, 4],
+            strokeWidth: 0,
+            hover: {
+                sizeOffset: 4
+            }
+        }
+    };
+    var rice_consumption_chart = new ApexCharts(document.querySelector("#rice_consumption"), rice_consumption);
+    rice_consumption_chart.render();
+
+
+    // District wise rice production
+    var district_rice = {
+        chart: {
+            height: 1000,
+            type: 'bar',
+            toolbar: {
+                show: false
+            }
+        },
+        tooltip: {
+            style: {
+                fontSize: "12px",
+                fontFamily: undefined,
+            },
+            onDatasetHover: {
+                style: {
+                    fontSize: "12px",
+                    fontFamily: undefined,
+                },
+            },
+            theme: "dark",
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                barHeight: '80%',
+                barSpacing: 0,
+                color: ['#5E3BFA', '#82DBFA', '#F75A8C', '#3BFAE7', '#F8C43A', '#6A3BFA', '#FA3B3B', '#3BFA54', '#FAA53B', '#FA3BC0', '#FF00FF', '#00FFFF', '#FFA500', '#00FF00', '#FF69B4', '#800080', '#FFD700', '#FF1493', '#7CFC00', '#FF6347', '#00CED1', '#8B008B', '#00BFFF', '#DC143C', '#9ACD32', '#FF4500', '#1E90FF', '#4B0082', '#32CD32', '#FF00FF']
+            }
+        },
+        series: [{
+            name: "District Wise Rice Production",
+            data: [{
+                x: 'Koppal',
+                y: 3462,
+                fillColor: "#3BFAE7",
+            }, {
+                x: 'Davangere',
+                y: 3379,
+                fillColor: "#82DBFA",
+            }, {
+                x: 'Bellary',
+                y: 3247,
+                fillColor: "#F75A8C",
+            }, {
+                x: 'Chamaraj Nagar',
+                y: 3097,
+                fillColor: "#3BFAE7",
+            }, {
+                x: 'Mandya',
+                y: 3052,
+                fillColor: "#F8C43A",
+            }, {
+                x: 'Mysore',
+                y: 2993,
+                fillColor: "#6A3BFA",
+            }, {
+                x: 'Raichur',
+                y: 2851,
+                fillColor: "#FA3B3B",
+            }, {
+                x: 'Bangalore (R)',
+                y: 2749,
+                fillColor: "#3BFA54",
+            }, {
+                x: 'Bangalore (U)',
+                y: 2732,
+                fillColor: "#5E3BFA",
+            }, {
+                x: 'Tumkur',
+                y: 2722,
+                fillColor: "#FAA53B",
+            }, {
+                x: 'Kolar',
+                y: 2715,
+                fillColor: "#FA3BC0",
+            }, {
+                x: 'Gadag',
+                y: 2545,
+                fillColor: "#FF00FF",
+            }, {
+                x: 'Chitradurga',
+                y: 2563,
+                fillColor: "#5E3BFA",
+            }, {
+                x: 'Hassan',
+                y: 2508,
+                fillColor: "#82DBFA",
+            }, {
+                x: 'Chikmaglur',
+                y: 2420,
+                fillColor: "#00FFFF",
+            }, {
+                x: 'Bagalkot',
+                y: 2353,
+                fillColor: "#82DBFA",
+            }, {
+                x: 'Bijapur',
+                y: 2351,
+                fillColor: "#FFA500",
+            }, {
+                x: 'Kodagu',
+                y: 2313,
+                fillColor: "#82DBFA",
+            }, {
+                x: 'Shimoga',
+                y: 2278,
+                fillColor: "#00FF00",
+            }, {
+                x: 'Dakshina Kannada',
+                y: 1979,
+                fillColor: "#800080",
+            }, {
+                x: 'Uttara Kannada',
+                y: 1798,
+                fillColor: "#FA3BC0",
+            }, {
+                x: 'Udupi',
+                y: 1765,
+                fillColor: "#9ACD32",
+            }, {
+                x: 'Gulbarga',
+                y: 1750,
+                fillColor: "#00BFFF",
+            }, {
+                x: 'Haveri',
+                y: 1745,
+                fillColor: "#F8C43A",
+            }, {
+                x: 'Belgaum',
+                y: 1679,
+                fillColor: "#7CFC00",
+            }, {
+                x: 'Dharwad',
+                y: 1156,
+                fillColor: "#4B0082",
+            }, {
+                x: 'Bidar',
+                y: 637,
+                fillColor: "#FF00FF",
+            }
+            ]
+        }],
+    };
+    var district_rice_chart = new ApexCharts(document.querySelector("#district_rice"), district_rice);
+    district_rice_chart.render();
+
+    // Crops consumption graph
+
+    const crops_consumption = {
+        series: [37, 30, 10, 8, 6, 6, 3],
+        labels: ['Rice', 'Wheat', 'Jowar', 'Pulses', 'Jute', 'Coffee', 'Rubber'],
+    };
+
+    const crops_consumption_chart = new ApexCharts(document.querySelector("#crops_consumption"), {
+        chart: {
+            height: 250,
+            type: 'pie'
+        },
+        series: crops_consumption.series,
+        labels: crops_consumption.labels,
+        legend: {
+            show: false
+        },
+    });
+    crops_consumption_chart.render()
+
+</script>
+
+</html>
